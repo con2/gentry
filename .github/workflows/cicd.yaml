@@ -3,7 +3,7 @@ name: cicd
 on:
   push:
     branches:
-      - master
+      - con2
 
 jobs:
   build:
