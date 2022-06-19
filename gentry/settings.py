@@ -1,4 +1,5 @@
 import os
+from email.utils import parseaddr
 
 from environ import Env
 
@@ -80,3 +81,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 if DEBUG:
     AUTH_PASSWORD_VALIDATORS = []
+
+# Sending email
+if env("EMAIL_HOST", default=""):
+    EMAIL_HOST = env("EMAIL_HOST")
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
+
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="spam@example.com")
+
+ADMINS = [parseaddr(addr) for addr in env("ADMINS", default="").split(",") if addr]
+
+MANAGERS = ADMINS
