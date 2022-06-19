@@ -1,3 +1,9 @@
+FROM node:16 AS gontend
+WORKDIR /build
+ADD gontend /build
+RUN yarn --frozen-lockfile
+RUN yarn build
+
 FROM python:3.10 as deps
 WORKDIR /app
 ADD pyproject.toml requirements.txt requirements-prod.txt setup.cfg ./
@@ -6,6 +12,7 @@ RUN mkdir -p /deps && pip wheel --wheel-dir /deps -r requirements.txt -r require
 FROM python:3.10
 WORKDIR /app
 COPY --from=deps /deps /deps
+COPY --from=gontend /build/static/ gontend/static/
 ADD pyproject.toml requirements.txt requirements-prod.txt setup.cfg ./
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc21156cfe1694c31d7d1792e/wait-for-it.sh scripts/wait-for-it.sh
 RUN pip install --no-cache --find-links=/deps -r requirements.txt -r requirements-prod.txt

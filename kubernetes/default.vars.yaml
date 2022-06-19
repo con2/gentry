@@ -1,9 +1,3 @@
-# Note: For {dev.,beta.,}conikuvat.fi and larppikuvat.fi, djangoapp_tag is overridden in Jenkinsfile.
-
-# Kompassi OAuth2 (NOTE: do not set if djangoapp_secret_managed: false)
-kompassi_client_id: ''
-kompassi_client_secret: ''
-
 # Note: If you use Skaffold/Emskaffolden, leave these at defaults and let Skaffold manage the images
 djangoapp_name: gentry
 djangoapp_image: !Var djangoapp_name
@@ -96,16 +90,6 @@ uwsgi_environment:
       secretKeyRef:
         name: !Var djangoapp_name
         key: secretKey
-  - name: KOMPASSI_OAUTH2_CLIENT_ID
-    valueFrom:
-      secretKeyRef:
-        name: !Var djangoapp_name
-        key: kompassiClientId
-  - name: KOMPASSI_OAUTH2_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: !Var djangoapp_name
-        key: kompassiClientSecret
   - name: ALLOWED_HOSTS
     value: !Join
       items: !Var djangoapp_allowed_hosts

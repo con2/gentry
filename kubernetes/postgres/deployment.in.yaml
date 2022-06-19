@@ -40,7 +40,7 @@ spec:
             command:
             - pg_isready
             - -U
-            - djangoapp
+            - postgres
           initialDelaySeconds: 15
           periodSeconds: 30
         livenessProbe:
@@ -48,7 +48,7 @@ spec:
             command:
             - pg_isready
             - -U
-            - djangoapp
+            - postgres
           initialDelaySeconds: 30
           periodSeconds: 30
       volumes:
