@@ -33,6 +33,8 @@ ingress_public_hostname: !Format "{djangoapp_name}.localhost"
 ingress_letsencrypt_enabled: false
 ingress_letsencrypt_cluster_issuer: letsencrypt-prod
 
+ingress_class_name: nginx
+
 # NOTE: "managed" PostgreSQL should not be considered production-ready.
 postgres_managed: true
 postgres_image: postgres
@@ -116,6 +118,10 @@ uwsgi_environment:
     value: !Join
       items: !Var djangoapp_admins
       separator: ","
+  - name: GOTIFY_IMMEDIATE
+    value: "true"
+  - name: GOTIFY_IMMEDIATE_THREADS
+    value: "true"
 
 # Default annotations work for nginx ingress with or without LetsEncrypt TLS. Override if you need something else.
 ingress_annotations: !If

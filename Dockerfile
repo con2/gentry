@@ -14,4 +14,4 @@ RUN chmod 755 scripts/*.sh
 USER 1000
 
 ENTRYPOINT ["scripts/docker-entrypoint.sh"]
-CMD ["uwsgi", "--http", "0.0.0.0:8000", "--module", "gentry.wsgi"]
+CMD ["uwsgi", "--http", "0.0.0.0:8000", "--module", "gentry.wsgi", "--master", "--workers", "3", "--enable-threads", "--disable-logging"]

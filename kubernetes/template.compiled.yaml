@@ -185,6 +185,10 @@ spec:
           value: ''
         - name: ADMINS
           value: ''
+        - name: GOTIFY_IMMEDIATE
+          value: 'true'
+        - name: GOTIFY_IMMEDIATE_THREADS
+          value: 'true'
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
@@ -237,6 +241,10 @@ spec:
           value: ''
         - name: ADMINS
           value: ''
+        - name: GOTIFY_IMMEDIATE
+          value: 'true'
+        - name: GOTIFY_IMMEDIATE_THREADS
+          value: 'true'
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
